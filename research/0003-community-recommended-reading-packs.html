@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="量化学习平台 · Community-Recommended Reading Packs">
+<title>Community-Recommended Reading Packs · 量化学习</title>
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="skip" href="#document">跳至正文</a>
+<header class="site-bar"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">Q</span>量化学习<span class="brand-en">QUANT LEARNING</span></a><a class="back" href="../index.html">← 返回学习平台</a></header>
+<div class="doc-layout">
+<aside class="doc-sidebar" aria-label="文档导航"><div class="doc-label">研究笔记</div><nav aria-label="本页目录"><div class="toc"><span class="toctitle">本页目录</span><ul>
+<li><a href="#core-spine">Core spine</a></li>
+<li><a href="#market-mechanism-and-execution">Market mechanism and execution</a></li>
+<li><a href="#signals-and-factors">Signals and factors</a></li>
+<li><a href="#backtesting-and-validation">Backtesting and validation</a></li>
+<li><a href="#risk-and-portfolio-construction">Risk and portfolio construction</a></li>
+<li><a href="#futures-and-commodities">Futures and commodities</a></li>
+<li><a href="#suggested-notebooklm-order">Suggested NotebookLM order</a></li>
+</ul>
+</div>
+</nav><div class="related"><a href="../CURRICULUM.html">十课学习总纲 ↗</a><a href="../NOTEBOOKLM_READING_PACKS.html">NotebookLM 阅读包 ↗</a><a href="../RESOURCES.html">资源清单 ↗</a></div></aside>
+<main id="document" class="doc-content" tabindex="-1"><p class="breadcrumb"><a href="../index.html">学习平台</a><span>/</span>研究笔记</p><h1 id="community-recommended-reading-packs">Community-Recommended Reading Packs</h1>
+<p>This note preserves the research results used to upgrade the course from five lessons to ten richer lessons. The selection favors stable official, author, publisher, university, exchange, regulator, and SSRN/NBER pages. These are appropriate for NotebookLM source packs because they are durable and have clear provenance.</p>
+<h2 id="core-spine">Core spine</h2>
+<ul>
+<li><a href="https://lucylabs.gatech.edu/ml4t/">Georgia Tech CS7646: Machine Learning for Trading</a>
+  Community value: a public university course built around Python financial data, computational investing, and machine-learning trading workflows.
+  Fits: course spine, Python workflow, market data, validation.
+  Active output: draw the pipeline from raw prices to orders, marking every leakage point.</li>
+<li><a href="https://wesmckinney.com/book/">Python for Data Analysis, 3E</a>
+  Community value: written by pandas creator Wes McKinney; open HTML edition covers Python, NumPy, pandas, loading, cleaning, joins, plotting, groupby, and time series.
+  Fits: lesson 3.
+  Active output: explain each transformation in a small OHLCV cleaning notebook.</li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/index.html">pandas User Guide</a>
+  Community value: canonical docs for the actual tool used in the course.
+  Fits: lesson 3.
+  Active output: produce a one-page "pandas for market data" cheat sheet.</li>
+</ul>
+<h2 id="market-mechanism-and-execution">Market mechanism and execution</h2>
+<ul>
+<li><a href="https://global.oup.com/academic/product/trading-and-exchanges-9780195144703">Trading and Exchanges: Market Microstructure for Practitioners</a>
+  Community value: standard practitioner-friendly market microstructure text by Larry Harris.
+  Fits: lessons 1 and 8.
+  Active output: use a toy order book to explain why market orders pay the spread and limit orders may earn it.</li>
+<li><a href="https://www.investor.gov/introduction-investing/investing-basics/how-stock-markets-work/types-orders">Investor.gov: Types of Orders</a>
+  Community value: regulator investor-education source for market, limit, and stop orders.
+  Fits: lessons 1 and 8.
+  Active output: explain execution certainty versus price certainty.</li>
+<li><a href="https://www.investor.gov/introduction-investing/investing-basics/how-stock-markets-work/executing-order">Investor.gov: Executing an Order</a>
+  Community value: regulator source on order routing and execution.
+  Fits: lesson 8.
+  Active output: trace an order from investor to broker to execution venue.</li>
+<li><a href="https://www.smallake.kr/wp-content/uploads/2016/03/optliq.pdf">Almgren and Chriss: Optimal Execution of Portfolio Transactions</a>
+  Community value: canonical execution paper modeling the tradeoff between volatility risk and market impact.
+  Fits: lesson 8.
+  Active output: explain temporary impact, permanent impact, and execution-risk tradeoff.</li>
+</ul>
+<h2 id="signals-and-factors">Signals and factors</h2>
+<ul>
+<li><a href="https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">Kenneth French Data Library</a>
+  Community value: default reproducible source for factor returns and benchmark portfolios.
+  Fits: lessons 2 and 7.
+  Active output: explain SMB, HML, RMW, CMA, and momentum as portfolio construction recipes.</li>
+<li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Time-Series-Momentum">AQR: Time Series Momentum</a>
+  Community value: canonical cross-asset trend-following paper.
+  Fits: lessons 2 and 10.
+  Active output: explain why own past returns can define a cross-asset signal.</li>
+<li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Value-and-Momentum-Everywhere">AQR: Value and Momentum Everywhere</a>
+  Community value: canonical cross-asset value/momentum framing.
+  Fits: lessons 2 and 7.
+  Active output: sketch a two-signal model where value and momentum diversify each other.</li>
+<li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Betting-Against-Beta">AQR: Betting Against Beta</a>
+  Community value: widely discussed factor paper about leverage constraints and low-beta effects.
+  Fits: lessons 6 and 7.
+  Active output: explain why higher beta is not automatically higher risk-adjusted return.</li>
+</ul>
+<h2 id="backtesting-and-validation">Backtesting and validation</h2>
+<ul>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/algorithm-engine">QuantConnect LEAN Algorithm Engine</a>
+  Community value: practical open-source event-driven engine docs that contrast batch backtesting with streaming analysis.
+  Fits: lesson 4.
+  Active output: explain event-driven backtesting using time frontier, data slice, order fill, and portfolio update.</li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/research-guide">QuantConnect Research Guide</a>
+  Community value: practical checklist for look-ahead, survivorship, overfitting, outliers, and paper trading.
+  Fits: lessons 4 and 9.
+  Active output: turn the guide into a strategy-review checklist.</li>
+<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2326253">Bailey et al.: The Probability of Backtest Overfitting</a>
+  Community value: standard warning against strategy mining and overfitting.
+  Fits: lessons 4 and 9.
+  Active output: explain why the best of 100 tested strategies is contaminated by selection.</li>
+<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551">Bailey and Lopez de Prado: The Deflated Sharpe Ratio</a>
+  Community value: formalizes Sharpe adjustment for selection bias, multiple trials, and non-normality.
+  Fits: lesson 9.
+  Active output: explain why ordinary Sharpe is weaker after many trials.</li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html">scikit-learn TimeSeriesSplit</a>
+  Community value: canonical ML documentation for train-before-test time-series validation.
+  Fits: lessons 4 and 9.
+  Active output: draw random split, walk-forward split, and walk-forward with gap; label leakage.</li>
+</ul>
+<h2 id="risk-and-portfolio-construction">Risk and portfolio construction</h2>
+<ul>
+<li><a href="https://www.nobelprize.org/prizes/economic-sciences/1990/markowitz/lecture/">Markowitz Nobel lecture: Foundations of Portfolio Theory</a>
+  Community value: canonical mean-variance and diversification source.
+  Fits: lesson 7.
+  Active output: explain why covariance matters for portfolio risk.</li>
+<li><a href="https://doi.org/10.1093/rfs/hhm075">DeMiguel, Garlappi, Uppal: Optimal Versus Naive Diversification</a>
+  Community value: often cited warning that optimized portfolios can fail to beat 1/N out of sample.
+  Fits: lesson 7.
+  Active output: compare equal-weight, inverse-vol, minimum-variance, and mean-variance portfolios.</li>
+<li><a href="https://doi.org/10.1002/j.1538-7305.1956.tb03809.x">Kelly 1956: A New Interpretation of Information Rate</a>
+  Community value: original Kelly log-growth sizing paper.
+  Fits: lesson 6.
+  Active output: explain why sizing is separate from direction.</li>
+<li><a href="https://arxiv.org/abs/1710.01787">On Kelly Betting: Some Limitations</a>
+  Community value: useful counterweight to full-Kelly enthusiasm.
+  Fits: lesson 6.
+  Active output: explain why estimation error and drawdowns justify fractional Kelly and hard risk caps.</li>
+</ul>
+<h2 id="futures-and-commodities">Futures and commodities</h2>
+<ul>
+<li><a href="https://www.cmegroup.com/education/courses/introduction-to-futures">CME: Introduction to Futures</a>
+  Community value: exchange-owned futures primer covering contract specs, tick value, notional value, margin, settlement, hedgers, and speculators.
+  Fits: lesson 5.
+  Active output: pick one CME contract and explain multiplier, tick value, notional exposure, margin, and roll date.</li>
+<li><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm">CFTC Commitments of Traders</a>
+  Community value: official futures positioning data.
+  Fits: lessons 5 and 10.
+  Active output: explain why COT is structure data, not a direct signal.</li>
+<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=560042">Gorton and Rouwenhorst: Facts and Fantasies About Commodity Futures</a>
+  Community value: canonical commodity futures asset-class paper.
+  Fits: lesson 10.
+  Active output: explain why commodity futures returns differ from spot commodity price returns.</li>
+<li><a href="https://www.nber.org/papers/w10595">NBER: Facts and Fantasies About Commodity Futures</a>
+  Community value: stable NBER page for the same commodity futures paper.
+  Fits: lesson 10.
+  Active output: separate collateral return, spot return, and roll/carry intuition.</li>
+<li><a href="https://www.eia.gov/petroleum/supply/weekly/">EIA Weekly Petroleum Status Report</a>
+  Community value: official event-data example for commodity inventories.
+  Fits: lesson 10 as an oil analogy before metals.
+  Active output: design an event calendar feature using inventory release timing.</li>
+</ul>
+<h2 id="suggested-notebooklm-order">Suggested NotebookLM order</h2>
+<ol>
+<li>CS7646 plus McKinney/pandas.</li>
+<li>Harris plus Investor.gov order materials.</li>
+<li>French Data Library plus AQR papers.</li>
+<li>LEAN docs plus Bailey/scikit-learn validation materials.</li>
+<li>Markowitz/DeMiguel/Kelly risk materials.</li>
+<li>CME/CFTC/Gorton-Rouwenhorst commodity materials.</li>
+</ol><footer class="doc-footer">量化学习 · 从可检验的假设开始。<a href="#document">回到顶部 ↑</a></footer></main>
+</div>
+</body>
+</html>

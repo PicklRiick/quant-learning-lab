@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="量化学习平台 · Market Signal Map Sources">
+<title>Market Signal Map Sources · 量化学习</title>
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="skip" href="#document">跳至正文</a>
+<header class="site-bar"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">Q</span>量化学习<span class="brand-en">QUANT LEARNING</span></a><a class="back" href="../index.html">← 返回学习平台</a></header>
+<div class="doc-layout">
+<aside class="doc-sidebar" aria-label="文档导航"><div class="doc-label">研究笔记</div><nav aria-label="本页目录"><div class="toc"><span class="toctitle">本页目录</span><ul>
+<li><a href="#how-to-read-the-map">How to read the map</a></li>
+<li><a href="#signal-families">Signal families</a><ul>
+<li><a href="#1-trend-and-momentum">1. Trend and momentum</a></li>
+<li><a href="#2-mean-reversion-and-reversal">2. Mean reversion and reversal</a></li>
+<li><a href="#3-volatility-and-risk-regime">3. Volatility and risk regime</a></li>
+<li><a href="#4-volume-liquidity-and-participation">4. Volume, liquidity, and participation</a></li>
+<li><a href="#5-macro-rates-and-economic-regime">5. Macro, rates, and economic regime</a></li>
+<li><a href="#6-futures-positioning-and-term-structure">6. Futures positioning and term structure</a></li>
+<li><a href="#7-fundamentals-and-valuation">7. Fundamentals and valuation</a></li>
+</ul>
+</li>
+<li><a href="#implementation-guardrails">Implementation guardrails</a></li>
+<li><a href="#first-card-recommendation">First-card recommendation</a></li>
+</ul>
+</div>
+</nav><div class="related"><a href="../CURRICULUM.html">十课学习总纲 ↗</a><a href="../NOTEBOOKLM_READING_PACKS.html">NotebookLM 阅读包 ↗</a><a href="../RESOURCES.html">资源清单 ↗</a></div></aside>
+<main id="document" class="doc-content" tabindex="-1"><p class="breadcrumb"><a href="../index.html">学习平台</a><span>/</span>研究笔记</p><h1 id="market-signal-map-sources">Market Signal Map Sources</h1>
+<p>This note collects the first reading set for understanding a market signal map well enough to write a first strategy hypothesis card. The course should treat each signal as a hypothesis about future return, risk, liquidity, or execution conditions, not as a trading recommendation.</p>
+<h2 id="how-to-read-the-map">How to read the map</h2>
+<p>A market signal becomes useful only after it answers four questions:</p>
+<ol>
+<li>What market behavior is this trying to capture?</li>
+<li>What data would have been visible at decision time?</li>
+<li>What action would the signal change: direction, filter, sizing, or risk?</li>
+<li>What result would falsify it?</li>
+</ol>
+<p>For the first card, use one alpha signal and one simple risk filter. Do not combine many factors before you can explain what each factor contributes.</p>
+<h2 id="signal-families">Signal families</h2>
+<h3 id="1-trend-and-momentum">1. Trend and momentum</h3>
+<p><strong>Question:</strong> Has recent price strength or weakness tended to continue?</p>
+<p>Start with:</p>
+<ul>
+<li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Time-Series-Momentum">AQR: Time Series Momentum</a>
+  The authors describe "time series momentum" as a security's own past return predicting its future return across futures and forward contracts. Use this to understand trend-following logic in a cross-asset way.</li>
+<li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Fact-Fiction-and-Momentum-Investing">AQR: Fact, Fiction and Momentum Investing</a>
+  A more accessible paper on momentum, including common misconceptions and why trading costs and implementation matter.</li>
+<li><a href="https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">Kenneth French Data Library</a>
+  Use the Momentum Factor and portfolio-sorted data to see how academic factor data is organized.</li>
+</ul>
+<p>Strategy-card translation:</p>
+<pre><code class="language-text">If asset X has positive 12-month return excluding the most recent month, go long X next month.
+Exit when the signal turns negative or after a fixed holding period.
+</code></pre>
+<p>Common mistakes:</p>
+<ul>
+<li>Accidentally using today's close to trade at today's close.</li>
+<li>Testing many lookback windows until one works.</li>
+<li>Ignoring transaction costs and turnover.</li>
+</ul>
+<h3 id="2-mean-reversion-and-reversal">2. Mean reversion and reversal</h3>
+<p><strong>Question:</strong> Has a move gone too far relative to a recent reference level?</p>
+<p>Use this after trend, not before, because reversal is more sensitive to horizon. One-day reversal, multi-week reversal, and multi-year value reversal are different ideas.</p>
+<p>Starter variables:</p>
+<ul>
+<li>Price deviation from moving average.</li>
+<li>Short-window return z-score.</li>
+<li>RSI-like overbought/oversold measures.</li>
+<li>Gap moves after large news or liquidation events.</li>
+</ul>
+<p>Strategy-card translation:</p>
+<pre><code class="language-text">If a liquid index ETF falls more than 2 rolling standard deviations below its 20-day mean, buy for a 5-day rebound, but trade only when volatility is not in a crisis regime.
+</code></pre>
+<p>Common mistakes:</p>
+<ul>
+<li>Confusing "cheap" with "will rebound soon."</li>
+<li>Buying into a structural downtrend without a risk stop.</li>
+<li>Ignoring that reversals can disappear after costs.</li>
+</ul>
+<h3 id="3-volatility-and-risk-regime">3. Volatility and risk regime</h3>
+<p><strong>Question:</strong> Is expected or realized uncertainty changing enough to alter exposure?</p>
+<p>Start with:</p>
+<ul>
+<li><a href="https://www.cboe.com/tradable-products/vix">Cboe VIX</a>
+  Cboe describes VIX as a measure of market expectations of near-term volatility conveyed by S&amp;P 500 option prices. Use it as a risk-regime input, not as a direct stock-price forecast.</li>
+<li><a href="https://www.cboe.com/markets/us/options/market-statistics/daily">Cboe Daily Market Statistics</a>
+  Use put/call ratios, options volume, and open interest to observe option-market positioning.</li>
+</ul>
+<p>Strategy-card translation:</p>
+<pre><code class="language-text">If trend signal is positive, hold risk assets only when realized volatility is below its 60-day 80th percentile.
+Reduce position size when volatility rises above that threshold.
+</code></pre>
+<p>Common mistakes:</p>
+<ul>
+<li>Treating high VIX as automatically bullish or bearish.</li>
+<li>Ignoring whether the signal is a direction signal or a sizing/risk filter.</li>
+<li>Using volatility as an entry signal when it is better suited as a risk throttle.</li>
+</ul>
+<h3 id="4-volume-liquidity-and-participation">4. Volume, liquidity, and participation</h3>
+<p><strong>Question:</strong> Is the move supported by enough trading activity and market participation?</p>
+<p>Starter variables:</p>
+<ul>
+<li>Dollar volume and turnover.</li>
+<li>Volume percentile relative to recent history.</li>
+<li>Bid-ask spread or estimated transaction cost.</li>
+<li>Advance/decline breadth when studying equity indexes.</li>
+</ul>
+<p>Use this mostly as a filter at the start. Low liquidity can make a signal impossible to implement even if the historical return looks attractive.</p>
+<p>Strategy-card translation:</p>
+<pre><code class="language-text">Trade only assets whose 20-day average dollar volume exceeds a minimum threshold.
+For index signals, require more advancing than declining constituents.
+</code></pre>
+<p>Common mistakes:</p>
+<ul>
+<li>Treating volume spike as always bullish.</li>
+<li>Backtesting illiquid assets at mid-price.</li>
+<li>Ignoring capacity: a signal can work for small size and fail for large size.</li>
+</ul>
+<h3 id="5-macro-rates-and-economic-regime">5. Macro, rates, and economic regime</h3>
+<p><strong>Question:</strong> Is the background environment supportive or hostile for the strategy?</p>
+<p>Start with:</p>
+<ul>
+<li><a href="https://fredhelp.stlouisfed.org/fred/about/about-fred/what-is-fred/">FRED: What is FRED?</a>
+  FRED offers economic time series and tools; ALFRED provides historical vintages. Use ALFRED when revisions matter, because GDP, inflation, and similar series are often revised after initial release.</li>
+</ul>
+<p>Starter variables:</p>
+<ul>
+<li>Treasury yields and yield spreads.</li>
+<li>Inflation and inflation expectations.</li>
+<li>Dollar index or exchange rates.</li>
+<li>Credit spreads and financial stress indexes.</li>
+<li>Employment and growth indicators.</li>
+</ul>
+<p>Strategy-card translation:</p>
+<pre><code class="language-text">Only take cyclical-risk trades when the 10y-3m yield spread is not deeply inverted and credit stress is not widening.
+</code></pre>
+<p>Common mistakes:</p>
+<ul>
+<li>Using revised macro data as if it was known at the time.</li>
+<li>Adding macro variables that update monthly to a daily trading rule without aligning dates.</li>
+<li>Believing macro narratives without turning them into timestamped data.</li>
+</ul>
+<h3 id="6-futures-positioning-and-term-structure">6. Futures positioning and term structure</h3>
+<p><strong>Question:</strong> What does the futures market say about hedgers, speculators, inventory pressure, or carry?</p>
+<p>Start with:</p>
+<ul>
+<li><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm">CFTC Commitments of Traders</a>
+  CFTC COT reports break open interest into trader categories and provide weekly historical data and a public reporting environment.</li>
+<li><a href="https://www.cmegroup.com/education/courses/introduction-to-futures/definition-of-a-futures-contract">CME: Definition of a Futures Contract</a>
+  CME explains exchange-traded futures as standardized contracts with specified quality, quantity, delivery time, and location.</li>
+</ul>
+<p>Starter variables:</p>
+<ul>
+<li>Net position by trader category.</li>
+<li>Open interest changes.</li>
+<li>Near-month versus far-month futures spread.</li>
+<li>Roll yield and carry.</li>
+</ul>
+<p>Strategy-card translation:</p>
+<pre><code class="language-text">For a futures market, trade a price trend signal only when open interest is rising and the curve structure does not imply severe negative carry.
+</code></pre>
+<p>Common mistakes:</p>
+<ul>
+<li>Reading COT as a precise cause of future price movement.</li>
+<li>Forgetting COT is released Friday for Tuesday positions.</li>
+<li>Splicing futures contracts incorrectly when constructing continuous price series.</li>
+</ul>
+<h3 id="7-fundamentals-and-valuation">7. Fundamentals and valuation</h3>
+<p><strong>Question:</strong> Is the asset cheap, expensive, profitable, or exposed to a structural economic driver?</p>
+<p>Start with:</p>
+<ul>
+<li><a href="https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">Kenneth French Data Library</a>
+  Use Fama/French factor data to understand market, size, value, profitability, investment, and momentum as systematic return descriptors.</li>
+<li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Value-and-Momentum-Everywhere">AQR: Value and Momentum Everywhere</a>
+  Use this to see why value and momentum can be studied across asset classes, while still requiring asset-specific implementation.</li>
+</ul>
+<p>Strategy-card translation:</p>
+<pre><code class="language-text">Rank a liquid stock universe by value and momentum; buy the top decile only if liquidity and risk filters pass.
+</code></pre>
+<p>Common mistakes:</p>
+<ul>
+<li>Mixing slow fundamental updates with daily timing signals.</li>
+<li>Using future financial statement values before their report date.</li>
+<li>Assuming a factor premium is a short-term timing tool.</li>
+</ul>
+<h2 id="implementation-guardrails">Implementation guardrails</h2>
+<ul>
+<li>Use <a href="https://www.quantconnect.com/docs/v2/writing-algorithms/reality-modeling/key-concepts">QuantConnect Reality Modeling</a> as the implementation checklist: fills, slippage, fees, brokerage, buying power, settlement, short availability, margin, and capacity.</li>
+<li>Read <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2326253">The Probability of Backtest Overfitting</a> early. The key practical lesson is that testing many strategy variants can manufacture an attractive backtest.</li>
+</ul>
+<h2 id="first-card-recommendation">First-card recommendation</h2>
+<p>Your first strategy hypothesis card should be deliberately simple:</p>
+<pre><code class="language-text">Signal family:
+Trend / time-series momentum.
+
+Market:
+One liquid, low-complexity asset such as SPY, or later one major futures contract after futures basics are learned.
+
+Entry:
+If the close is above its 200-day moving average and the 60-day return is positive, enter long on the next trading day.
+
+Exit:
+Exit when the close falls below the 200-day moving average, or after a fixed maximum holding period.
+
+Risk filter:
+If realized volatility is above its 60-day 80th percentile, cut position size by half or do not open new positions.
+
+Position sizing:
+Use a fixed small fraction of capital in backtest.
+
+Costs:
+Include transaction cost and slippage from the beginning.
+
+Evaluation:
+Annualized return, maximum drawdown, Sharpe ratio, turnover, number of trades, and sample-out period.
+</code></pre>
+<p>This is not proposed as a profitable strategy. It is a practice card because it forces you to define timing, visibility, costs, and falsification.</p><footer class="doc-footer">量化学习 · 从可检验的假设开始。<a href="#document">回到顶部 ↑</a></footer></main>
+</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="量化学习平台 · NotebookLM 阅读包">
+<title>NotebookLM 阅读包 · 量化学习</title>
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<a class="skip" href="#document">跳至正文</a>
+<header class="site-bar"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">Q</span>量化学习<span class="brand-en">QUANT LEARNING</span></a><a class="back" href="index.html">← 返回学习平台</a></header>
+<div class="doc-layout">
+<aside class="doc-sidebar" aria-label="文档导航"><div class="doc-label">课程资料</div><nav aria-label="本页目录"><div class="toc"><span class="toctitle">本页目录</span><ul>
+<li><a href="#pack-1">Pack 1: 策略假设卡</a></li>
+<li><a href="#pack-2">Pack 2: 市场信号地图</a></li>
+<li><a href="#pack-3-python">Pack 3: Python 金融数据工作流</a></li>
+<li><a href="#pack-4">Pack 4: 回测与偏差控制</a></li>
+<li><a href="#pack-5">Pack 5: 期货基础</a></li>
+<li><a href="#pack-6">Pack 6: 仓位与风险预算</a></li>
+<li><a href="#pack-7">Pack 7: 组合构建</a></li>
+<li><a href="#pack-8">Pack 8: 成本、流动性与执行</a></li>
+<li><a href="#pack-9">Pack 9: 统计验证与模型失败</a></li>
+<li><a href="#pack-10">Pack 10: 铜与有色金属应用</a></li>
+<li><a href="#_1">固定提问模板</a></li>
+</ul>
+</div>
+</nav><div class="related"><a href="CURRICULUM.html">十课学习总纲 ↗</a><a href="NOTEBOOKLM_READING_PACKS.html">NotebookLM 阅读包 ↗</a><a href="RESOURCES.html">资源清单 ↗</a></div></aside>
+<main id="document" class="doc-content" tabindex="-1"><p class="breadcrumb"><a href="index.html">学习平台</a><span>/</span>课程资料</p><h1 id="notebooklm-reading-packs">NotebookLM Reading Packs</h1>
+<p>每一课建议单独建一个 NotebookLM notebook。不要一次塞完整课程；主动输出会被稀释。每个 pack 包含本课程文件、一个 reference、2-4 个核心外部来源。</p>
+<p>全局研究索引：<a class="file-link" href="research/0003-community-recommended-reading-packs.html"><code>research/0003-community-recommended-reading-packs.md</code></a>。如果某一课需要加深阅读，先把该文件对应主题段落加入 NotebookLM，再加入本课的 3-5 个核心来源。</p>
+<h2 id="pack-1">Pack 1: 策略假设卡</h2>
+<ul>
+<li><a class="file-link" href="lessons/0001-from-idea-to-testable-hypothesis.html"><code>lessons/0001-from-idea-to-testable-hypothesis.html</code></a></li>
+<li><a class="file-link" href="reference/0001-quant-trading-glossary.html"><code>reference/0001-quant-trading-glossary.html</code></a></li>
+<li><a href="https://www.investor.gov/introduction-investing/investing-basics/how-stock-markets-work/types-orders">Investor.gov: Types of Orders</a></li>
+<li><a href="https://www.investor.gov/introduction-investing/investing-basics/what-risk">Investor.gov: What is Risk?</a></li>
+<li><a href="https://www.quantstart.com/successful-algorithmic-trading-ebook/">QuantStart: Successful Algorithmic Trading</a></li>
+<li><a href="https://global.oup.com/academic/product/trading-and-exchanges-9780195144703">Trading and Exchanges: Market Microstructure for Practitioners</a></li>
+</ul>
+<p>主动输出：解释为什么“观点”必须变成可检验假设卡。</p>
+<h2 id="pack-2">Pack 2: 市场信号地图</h2>
+<ul>
+<li><a class="file-link" href="lessons/0002-market-signal-map-to-first-card.html"><code>lessons/0002-market-signal-map-to-first-card.html</code></a></li>
+<li><a class="file-link" href="reference/0003-market-signal-map.html"><code>reference/0003-market-signal-map.html</code></a></li>
+<li><a class="file-link" href="research/0001-market-signal-map-sources.html"><code>research/0001-market-signal-map-sources.md</code></a></li>
+<li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Time-Series-Momentum">AQR: Time Series Momentum</a></li>
+<li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Fact-Fiction-and-Momentum-Investing">AQR: Fact, Fiction and Momentum Investing</a></li>
+<li><a href="https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">Kenneth French Data Library</a></li>
+</ul>
+<p>主动输出：画出七类信号，并说明每类信号适合做 alpha、过滤器、仓位还是执行约束。</p>
+<h2 id="pack-3-python">Pack 3: Python 金融数据工作流</h2>
+<ul>
+<li><a class="file-link" href="lessons/0003-python-financial-data-workflow.html"><code>lessons/0003-python-financial-data-workflow.html</code></a></li>
+<li><a class="file-link" href="reference/0004-python-financial-data-workflow.html"><code>reference/0004-python-financial-data-workflow.html</code></a></li>
+<li><a href="https://wesmckinney.com/book/">Python for Data Analysis, 3E</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/index.html">pandas User Guide</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/window.html">pandas Windowing operations</a></li>
+</ul>
+<p>主动输出：从 CSV 到策略收益，解释每一步转换和每一步可能出错的地方。</p>
+<h2 id="pack-4">Pack 4: 回测与偏差控制</h2>
+<ul>
+<li><a class="file-link" href="lessons/0004-minimal-backtest-and-bias-control.html"><code>lessons/0004-minimal-backtest-and-bias-control.html</code></a></li>
+<li><a class="file-link" href="reference/0005-backtest-bias-checklist.html"><code>reference/0005-backtest-bias-checklist.html</code></a></li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/research-guide">QuantConnect Research Guide</a></li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/algorithm-engine">QuantConnect Algorithm Engine</a></li>
+<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2326253">The Probability of Backtest Overfitting</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html">scikit-learn TimeSeriesSplit</a></li>
+</ul>
+<p>主动输出：解释事件驱动回测中的 time frontier，并指出 toy pandas 回测最容易在哪里偷看未来。</p>
+<h2 id="pack-5">Pack 5: 期货基础</h2>
+<ul>
+<li><a class="file-link" href="lessons/0005-futures-basics-and-commodities-bridge.html"><code>lessons/0005-futures-basics-and-commodities-bridge.html</code></a></li>
+<li><a class="file-link" href="reference/0006-futures-basics-bridge.html"><code>reference/0006-futures-basics-bridge.html</code></a></li>
+<li><a href="https://www.cmegroup.com/education/courses/introduction-to-futures">CME: Introduction to Futures</a></li>
+<li><a href="https://www.cmegroup.com/education/courses/introduction-to-futures/margin-know-what-is-needed">CME: Margin - Know What's Needed</a></li>
+<li><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm">CFTC Commitments of Traders</a></li>
+</ul>
+<p>主动输出：选择一个期货合约，解释 tick size、multiplier、notional exposure、margin 和 roll date。</p>
+<h2 id="pack-6">Pack 6: 仓位与风险预算</h2>
+<ul>
+<li><a class="file-link" href="lessons/0006-position-sizing-and-risk-budget.html"><code>lessons/0006-position-sizing-and-risk-budget.html</code></a></li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/algorithm-framework/risk-management/key-concepts">QuantConnect Risk Management</a></li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/trading-and-orders/position-sizing">QuantConnect Position Sizing</a></li>
+<li><a href="https://doi.org/10.1002/j.1538-7305.1956.tb03809.x">Kelly 1956: A New Interpretation of Information Rate</a></li>
+<li><a href="https://arxiv.org/abs/2002.03448">Kelly Criterion: From a Simple Random Walk to Levy Processes</a></li>
+<li><a href="https://arxiv.org/abs/1710.01787">On Kelly Betting: Some Limitations</a></li>
+</ul>
+<p>主动输出：解释为什么一个方向信号必须配仓位规则，否则策略定义不完整。</p>
+<h2 id="pack-7">Pack 7: 组合构建</h2>
+<ul>
+<li><a class="file-link" href="lessons/0007-portfolio-construction-and-diversification.html"><code>lessons/0007-portfolio-construction-and-diversification.html</code></a></li>
+<li><a href="https://www.nobelprize.org/prizes/economic-sciences/1990/markowitz/lecture/">Markowitz Nobel lecture: Foundations of Portfolio Theory</a></li>
+<li><a href="https://academic.oup.com/rfs/article-abstract/22/5/1915/1592901">Optimal Versus Naive Diversification</a></li>
+<li><a href="https://www.mlfactor.com/">Machine Learning for Factor Investing</a></li>
+<li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Value-and-Momentum-Everywhere">AQR: Value and Momentum Everywhere</a></li>
+<li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Betting-Against-Beta">AQR: Betting Against Beta</a></li>
+</ul>
+<p>主动输出：解释为什么组合风险取决于协方差，而不是单个资产风险的简单平均。</p>
+<h2 id="pack-8">Pack 8: 成本、流动性与执行</h2>
+<ul>
+<li><a class="file-link" href="lessons/0008-costs-liquidity-and-execution.html"><code>lessons/0008-costs-liquidity-and-execution.html</code></a></li>
+<li><a href="https://global.oup.com/academic/product/trading-and-exchanges-9780195144703">Trading and Exchanges: Market Microstructure for Practitioners</a></li>
+<li><a href="https://www.investor.gov/introduction-investing/investing-basics/how-stock-markets-work/types-orders">Investor.gov: Types of Orders</a></li>
+<li><a href="https://www.investor.gov/introduction-investing/investing-basics/how-stock-markets-work/executing-order">Investor.gov: Executing an Order</a></li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/reality-modeling/key-concepts">QuantConnect Reality Modeling</a></li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/trading-and-orders/key-concepts">QuantConnect Trading and Orders</a></li>
+<li><a href="https://www.smallake.kr/wp-content/uploads/2016/03/optliq.pdf">Almgren and Chriss: Optimal Execution of Portfolio Transactions</a></li>
+</ul>
+<p>主动输出：用玩具订单簿解释 spread、market order、limit order、slippage 和 market impact。</p>
+<h2 id="pack-9">Pack 9: 统计验证与模型失败</h2>
+<ul>
+<li><a class="file-link" href="lessons/0009-statistical-validation-and-model-failure.html"><code>lessons/0009-statistical-validation-and-model-failure.html</code></a></li>
+<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551">The Deflated Sharpe Ratio</a></li>
+<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2326253">The Probability of Backtest Overfitting</a></li>
+<li><a href="https://academic.oup.com/rfs/article/29/1/5/1843824">Harvey, Liu, Zhu: ... and the Cross-Section of Expected Returns</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html">scikit-learn TimeSeriesSplit</a></li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/research-guide">QuantConnect Research Guide</a></li>
+</ul>
+<p>主动输出：解释为什么测试 100 个策略后挑最好一个，会改变你对 Sharpe 的信任。</p>
+<h2 id="pack-10">Pack 10: 铜与有色金属应用</h2>
+<ul>
+<li><a class="file-link" href="lessons/0010-commodities-and-copper-application-bridge.html"><code>lessons/0010-commodities-and-copper-application-bridge.html</code></a></li>
+<li><a class="file-link" href="reference/0002-copper-futures-and-spot-data-map.html"><code>reference/0002-copper-futures-and-spot-data-map.html</code></a></li>
+<li><a href="https://www.lme.com/en/metals/non-ferrous/lme-copper">LME Copper</a></li>
+<li><a href="https://www.lme.com/en/Market-data/Reports-and-data/Warehouse-and-stocks-reports">LME Warehouse and Stock Reports</a></li>
+<li><a href="https://icsg.org/">International Copper Study Group</a></li>
+<li><a href="https://www.cmegroup.com/markets/metals/base/copper.contractSpecs.html">CME Copper Futures</a></li>
+<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=560042">Facts and Fantasies About Commodity Futures</a></li>
+<li><a href="https://www.nber.org/papers/w10595">NBER: Facts and Fantasies About Commodity Futures</a></li>
+<li><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm">CFTC Commitments of Traders</a></li>
+<li><a href="https://www.eia.gov/petroleum/supply/weekly/">EIA Weekly Petroleum Status Report</a></li>
+</ul>
+<p>主动输出：写一张铜期货研究卡，并说明现货数据的可见时间、授权边界和合规风险。</p>
+<h2 id="_1">固定提问模板</h2>
+<p>每个 NotebookLM pack 都问这三类问题：</p>
+<ol>
+<li>“请用中文解释本课 5 个关键概念，并画出它们的依赖关系。”</li>
+<li>“请给我 10 个主动回忆问题，答案控制在 2-4 句话。”</li>
+<li>“请指出本课框架的隐含假设，以及哪些市场情景会打破这些假设。”</li>
+</ol><footer class="doc-footer">量化学习 · 从可检验的假设开始。<a href="#document">回到顶部 ↑</a></footer></main>
+</div>
+</body>
+</html>

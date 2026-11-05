@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>市场信号地图</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Reference 0003</div>
+        <h1>市场信号地图</h1>
+        <p class="subtitle">写策略假设卡前，先把信号放到正确位置：方向、过滤器、仓位、风险、执行。</p>
+      </header>
+
+      <section>
+        <h2>信号不是预测口号</h2>
+        <p>一个市场信号是一个可观察变量，它应该改变某个明确决策：买卖方向、是否交易、仓位大小、风险限额或执行方式。不要问“这个指标准不准”，先问“它改变哪一个动作”。</p>
+      </section>
+
+      <section>
+        <h2>七类基础信号</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>趋势 / 动量</strong>
+            <p>过去强的是否继续强。常见变量：过去 N 日收益、均线突破、相对强弱排名。第一张卡优先从这里开始。</p>
+          </article>
+          <article class="panel">
+            <strong>均值回归 / 反转</strong>
+            <p>价格是否偏离近期参考点太远。常见变量：均线偏离、z-score、短期极端涨跌。它对持有期和成本很敏感。</p>
+          </article>
+          <article class="panel">
+            <strong>波动 / 风险状态</strong>
+            <p>不确定性是否升高。常见变量：历史波动率、VIX、波动率分位数。它通常更适合做仓位或过滤器。</p>
+          </article>
+          <article class="panel">
+            <strong>成交量 / 流动性</strong>
+            <p>价格变动是否有交易参与支持，交易是否可执行。常见变量：成交额、换手率、买卖价差、冲击成本。</p>
+          </article>
+          <article class="panel">
+            <strong>市场宽度 / 参与度</strong>
+            <p>指数上涨是否由多数资产参与。常见变量：上涨家数、下跌家数、成分股在均线上方比例。</p>
+          </article>
+          <article class="panel">
+            <strong>情绪 / 仓位</strong>
+            <p>参与者是否过度乐观或恐慌。常见变量：put/call ratio、VIX、COT 持仓、资金流。</p>
+          </article>
+          <article class="panel">
+            <strong>宏观 / 基本面</strong>
+            <p>资产处在什么经济环境。常见变量：利率、通胀、美元、信用利差、估值、盈利、库存。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>四个位置</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>Alpha 信号</strong>
+            <p>决定方向：做多、做空或不持有。例如趋势突破、价值排名、期限结构。</p>
+          </article>
+          <article class="panel">
+            <strong>过滤器</strong>
+            <p>决定是否启用 alpha。例如高波动时暂停，低流动性时不交易。</p>
+          </article>
+          <article class="panel">
+            <strong>仓位规则</strong>
+            <p>决定押多少。例如波动率越高仓位越低，最大组合仓位不超过某比例。</p>
+          </article>
+          <article class="panel">
+            <strong>执行假设</strong>
+            <p>决定如何成交。例如下一日开盘、市价单、限价单、滑点和手续费。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>第一张卡的推荐组合</h2>
+        <div class="callout">
+          <strong>一个 alpha + 一个风险过滤器。</strong>
+          不要一开始就混合五个因子。建议用趋势作为 alpha，用波动率作为过滤器，因为两者概念清楚、数据容易取得、错误也容易暴露。
+        </div>
+        <pre class="formula"><code>Signal family: 趋势 / 动量
+Entry: close &gt; 200-day moving average AND 60-day return &gt; 0
+Filter: realized volatility &lt; its 60-day 80th percentile
+Exit: close &lt; 200-day moving average
+Costs: transaction fee + slippage
+Evaluate: return, max drawdown, Sharpe, turnover, trade count</code></pre>
+      </section>
+
+      <section>
+        <h2>阅读材料</h2>
+        <ul class="compact-list">
+          <li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Time-Series-Momentum">AQR: Time Series Momentum</a>：趋势/动量。</li>
+          <li><a href="https://www.aqr.com/Insights/Research/Journal-Article/Fact-Fiction-and-Momentum-Investing">AQR: Fact, Fiction and Momentum Investing</a>：动量入门和误解。</li>
+          <li><a href="https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">Kenneth French Data Library</a>：因子数据结构。</li>
+          <li><a href="https://www.cboe.com/tradable-products/vix">Cboe VIX</a>：波动率和风险情绪。</li>
+          <li><a href="https://fredhelp.stlouisfed.org/fred/about/about-fred/what-is-fred/">FRED</a>：宏观时间序列和历史版本。</li>
+          <li><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm">CFTC COT</a>：期货参与者持仓结构。</li>
+        </ul>
+      </section>
+
+      <footer class="footer">
+        Research note: <a href="../research/0001-market-signal-map-sources.html">market signal map sources</a>.
+        Next lesson: <a href="../lessons/0002-market-signal-map-to-first-card.html">用信号地图写第一张策略卡</a>.
+      </footer>
+    </main>
+  </body>
+</html>

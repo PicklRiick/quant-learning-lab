@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>铜期货与现货数据地图</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Reference 0002</div>
+        <h1>铜期货与现货数据地图</h1>
+        <p class="subtitle">把有色金属期货和现货贸易数据放在同一张研究地图上：先理解业务，再量化变量。</p>
+      </header>
+
+      <section>
+        <h2>为什么这是独特优势</h2>
+        <p>纯价格数据人人都能拿到；现货业务流程、报价、成交、库存、物流、账期、升贴水和客户结构更接近真实供需摩擦。它们不一定直接预测价格，但可能帮助解释期货价格、基差、期限结构和风险暴露。</p>
+      </section>
+
+      <section>
+        <h2>优先观察的变量</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>基差</strong>
+            <p>现货价减期货价。观察现货紧张、套保压力和交割预期。</p>
+          </article>
+          <article class="panel">
+            <strong>升贴水</strong>
+            <p>不同地区、品牌、仓库、交割品级的价格差。反映局部供需和物流约束。</p>
+          </article>
+          <article class="panel">
+            <strong>期限结构</strong>
+            <p>近月和远月价差。关注 backwardation、contango、移仓收益和库存压力。</p>
+          </article>
+          <article class="panel">
+            <strong>库存与仓单</strong>
+            <p>交易所库存、社会库存、在途库存、注销仓单、出入库速度。</p>
+          </article>
+          <article class="panel">
+            <strong>成交与询报价</strong>
+            <p>真实订单、报价接受率、客户询价强度、成交价格偏离公开基准的程度。</p>
+          </article>
+          <article class="panel">
+            <strong>贸易流程</strong>
+            <p>采购、销售、运输、仓储、付款、开票、点价、套保和交割的时间顺序。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>数据使用红线</h2>
+        <ul class="compact-list">
+          <li>只使用已授权、允许研究用途的数据。</li>
+          <li>先脱敏客户、交易对手、合同编号和敏感商业条款。</li>
+          <li>保留事件时间、录入时间、可见时间，避免未来函数。</li>
+          <li>区分公司真实风险管理、辅助决策和个人交易研究。</li>
+          <li>任何实盘使用前必须通过公司合规、法务和授权边界确认。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>学习顺序</h2>
+        <ol class="compact-list">
+          <li>铜市场地图：矿山、冶炼、精炼、贸易商、终端需求、仓库和交易所。</li>
+          <li>期货机制：合约、保证金、交割、移仓、期限结构和套保。</li>
+          <li>现货流程：报价、点价、升贴水、物流、库存和账期。</li>
+          <li>变量工程：把业务事件转成时间序列特征。</li>
+          <li>回测设计：基差、期限结构、库存、成交强度和公开价格的联合验证。</li>
+        </ol>
+      </section>
+
+      <footer class="footer">
+        Main sources: <a href="https://www.lme.com/en/metals/non-ferrous/lme-copper">LME Copper</a>,
+        <a href="https://www.lme.com/en/Market-data/Reports-and-data/Warehouse-and-stocks-reports">LME Warehouse and Stock Reports</a>,
+        <a href="https://icsg.org/">ICSG</a>.
+      </footer>
+    </main>
+  </body>
+</html>

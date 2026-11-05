@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>第 9 课：统计验证、过拟合与模型失败</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Lesson 0009</div>
+        <h1>统计验证、过拟合与模型失败</h1>
+        <p class="subtitle">当你能很快生成很多策略时，最大风险不是没想法，而是被自己挑出来的漂亮结果骗到。</p>
+        <div class="meta">
+          <span>预计时间：30-35 分钟</span>
+          <span><a href="../CURRICULUM.html">打开前十课总纲</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>本课位置</h2>
+        <p>第 4 课建立偏差清单，第 9 课更进一步：当你测试很多规则、很多参数、很多市场时，普通表现指标会变得过度乐观。</p>
+      </section>
+
+      <section>
+        <h2>核心阅读</h2>
+        <ul class="compact-list">
+          <li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551">The Deflated Sharpe Ratio</a>：理解选择偏差、多重检验和非正态收益如何抬高 Sharpe。</li>
+          <li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2326253">The Probability of Backtest Overfitting</a>：理解多次试验如何制造漂亮回测。</li>
+          <li><a href="https://academic.oup.com/rfs/article/29/1/5/1843824">... and the Cross-Section of Expected Returns</a>：理解因子挖掘越多，统计显著性门槛越应提高。</li>
+          <li><a href="https://scikit-learn.org/stable/modules/cross_validation.html#time-series-split">scikit-learn TimeSeriesSplit</a>：把时间序列验证落实到“过去训练、未来测试”。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>三个失败模式</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>参数挖掘</strong>
+            <p>窗口、阈值、标的、持有期调到刚好适配过去。</p>
+          </article>
+          <article class="panel">
+            <strong>指标崇拜</strong>
+            <p>只看 Sharpe，不看换手、回撤、偏度、尾部和稳定性。</p>
+          </article>
+          <article class="panel">
+            <strong>验证污染</strong>
+            <p>样本外被反复查看并用于修改策略，最后也变成样本内。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>费曼输出</h2>
+        <div class="callout">
+          假设你试了 100 个参数组合，只有一个表现很好。请解释为什么这更可能说明“选择过程有问题”，而不是说明“发现了确定优势”。
+        </div>
+      </section>
+
+      <section>
+        <h2>隐含假设与反例</h2>
+        <p>统计验证假设错误主要来自随机性和选择偏差。反例是数据权限、交易约束、合规边界和市场制度变化，这些不是提高显著性门槛就能解决的。</p>
+      </section>
+
+      
+    </main>
+  <script src="../assets/learning-state.js" defer></script>
+  </body>
+</html>
+

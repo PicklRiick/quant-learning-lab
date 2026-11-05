@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>第 7 课：组合构建与分散化</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Lesson 0007</div>
+        <h1>组合构建与分散化</h1>
+        <p class="subtitle">一个策略的 Sharpe 不是终点。真正的问题是：多个策略和资产放在一起时，风险是否变得更稳健。</p>
+        <div class="meta">
+          <span>预计时间：25-30 分钟</span>
+          <span><a href="../CURRICULUM.html">打开前十课总纲</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>本课位置</h2>
+        <p>第 6 课问“一个信号押多少”。第 7 课问“多个信号、多个资产、多个市场如何放在一起”。组合不是把收益相加，而是管理共同暴露。</p>
+      </section>
+
+      <section>
+        <h2>核心阅读</h2>
+        <ul class="compact-list">
+          <li><a href="https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html">Kenneth French Data Library</a>：观察因子和排序组合如何作为研究对象。</li>
+          <li><a href="https://academic.oup.com/rfs/article-abstract/22/5/1915/1592901">Optimal Versus Naive Diversification</a>：理解简单 1/N 为什么常常是强基线。</li>
+          <li><a href="https://www.cambridge.org/core/books/machine-learning-for-asset-managers/6D9211305EA2E425D33A9F38D0AE3545">Machine Learning for Asset Managers</a>：理解资产管理中模型、理论和数据工具的关系。</li>
+          <li><a href="https://www.mlfactor.com/">Machine Learning for Factor Investing</a>：理解因子、预测、组合回测和解释性之间的桥。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>组合里的三个问题</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>收益来源</strong>
+            <p>多个策略是否真的来自不同经济机制，还是同一个风险偏好的不同包装？</p>
+          </article>
+          <article class="panel">
+            <strong>相关性</strong>
+            <p>平时低相关的资产，危机时可能同时下跌。相关性本身会随状态变化。</p>
+          </article>
+          <article class="panel">
+            <strong>基线</strong>
+            <p>复杂优化必须先战胜简单基线，例如等权、波动率倒数和风险预算。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>费曼输出</h2>
+        <div class="callout">
+          向一个非技术朋友解释：为什么“十个赚钱策略”组合后仍然可能在同一天一起亏钱？请用“共同暴露”这个词。
+        </div>
+      </section>
+
+      <section>
+        <h2>隐含假设与反例</h2>
+        <p>组合构建假设相关结构有一定稳定性。反例是流动性危机、去杠杆和保证金压力，它们会让原本不同的策略在同一时刻被迫卖出。</p>
+      </section>
+
+      
+    </main>
+  <script src="../assets/learning-state.js" defer></script>
+  </body>
+</html>
+

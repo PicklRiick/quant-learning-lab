@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>第 6 课：仓位与风险预算</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Lesson 0006</div>
+        <h1>仓位与风险预算</h1>
+        <p class="subtitle">方向判断决定“是否值得冒险”，仓位规则决定“冒多大的险”。入门者最容易高估前者、低估后者。</p>
+        <div class="meta">
+          <span>预计时间：25-30 分钟</span>
+          <span><a href="../CURRICULUM.html">打开前十课总纲</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>本课位置</h2>
+        <p>前五课已经把想法、信号、数据、回测和期货机制串起来。本课开始进入“活下来”的问题：同一个信号，用 5%、50% 或杠杆仓位，体验完全不同。</p>
+      </section>
+
+      <section>
+        <h2>核心阅读</h2>
+        <ul class="compact-list">
+          <li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/algorithm-framework/risk-management/key-concepts">QuantConnect Risk Management</a>：理解风险模块如何调整或取消风险过高的组合目标。</li>
+          <li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/trading-and-orders/position-sizing">QuantConnect Position Sizing</a>：区分目标权重、数量、名义价值和可用资金。</li>
+          <li><a href="https://arxiv.org/abs/2002.03448">Kelly Criterion: From a Simple Random Walk to Levy Processes</a>：理解 Kelly 是增长率优化，不是满仓口号。</li>
+          <li><a href="https://arxiv.org/abs/1710.01787">On Kelly Betting: Some Limitations</a>：理解估计误差和回撤会破坏理论最优下注。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>三种入门仓位</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>固定比例</strong>
+            <p>每次使用固定资本比例。容易实现，适合第一张策略卡，但不会自动适应波动。</p>
+          </article>
+          <article class="panel">
+            <strong>波动率目标</strong>
+            <p>波动高时仓位低，波动低时仓位高。它把风险稳定性放在方向判断之前。</p>
+          </article>
+          <article class="panel">
+            <strong>分数 Kelly</strong>
+            <p>在估计有优势时按理论下注的一部分配置。它承认模型误差和心理承受力。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>费曼输出</h2>
+        <div class="callout">
+          用 3 分钟解释：为什么“胜率 55%”不足以决定仓位？你必须同时知道赔率、亏损分布、连续亏损、成本、参数误差和最大可承受回撤。
+        </div>
+      </section>
+
+      <section>
+        <h2>隐含假设与反例</h2>
+        <p>本课假设历史波动和胜率能给未来风险一些信息。反例是政策突变、流动性消失、保证金上调和跳空，这些会让过去估计出的仓位显得过大。</p>
+      </section>
+
+      
+    </main>
+  <script src="../assets/learning-state.js" defer></script>
+  </body>
+</html>
+

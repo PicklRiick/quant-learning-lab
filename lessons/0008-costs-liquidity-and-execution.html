@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>第 8 课：交易成本、流动性与执行</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Lesson 0008</div>
+        <h1>交易成本、流动性与执行</h1>
+        <p class="subtitle">很多策略不是没有信号，而是信号太小、换手太高、成本太真实。</p>
+        <div class="meta">
+          <span>预计时间：25-30 分钟</span>
+          <span><a href="../CURRICULUM.html">打开前十课总纲</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>本课位置</h2>
+        <p>第 4 课讲回测要计成本，本课具体拆开成本：手续费、买卖价差、滑点、冲击成本、未成交和容量。</p>
+      </section>
+
+      <section>
+        <h2>核心阅读</h2>
+        <ul class="compact-list">
+          <li><a href="https://www.investor.gov/introduction-investing/investing-basics/how-stock-markets-work/types-orders">Investor.gov: Types of Orders</a>：解释市价单、限价单和止损单的取舍。</li>
+          <li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/reality-modeling/key-concepts">QuantConnect Reality Modeling</a>：把 fills、slippage、fees、brokerage 和 buying power 纳入现实性清单。</li>
+          <li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/trading-and-orders/key-concepts">QuantConnect Trading and Orders</a>：理解订单、订单事件、交易统计和下单前检查。</li>
+          <li><a href="https://www.cboe.com/markets/us/options/market-statistics/daily">Cboe Daily Market Statistics</a>：观察成交量、未平仓量和 put/call ratio 等市场活动数据。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>从理想到现实</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>理想回测</strong>
+            <p>下一日开盘全部成交，无滑点，无价格冲击，手续费固定。</p>
+          </article>
+          <article class="panel">
+            <strong>现实执行</strong>
+            <p>价格会跳、订单可能部分成交、低流动性会放大成本，规模会改变可行性。</p>
+          </article>
+          <article class="panel">
+            <strong>研究问题</strong>
+            <p>信号收益是否大到足以覆盖成本？如果规模扩大，收益是否还存在？</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>费曼输出</h2>
+        <div class="callout">
+          用“市价单”和“限价单”解释：为什么保证成交和保证价格不能同时无成本获得？
+        </div>
+      </section>
+
+      <section>
+        <h2>隐含假设与反例</h2>
+        <p>本课假设入门阶段规模较小，成本可以先用简化模型近似。反例是有色金属低流动性合约、临近交割月份、突发事件和大额现货套保。</p>
+      </section>
+
+      
+    </main>
+  <script src="../assets/learning-state.js" defer></script>
+  </body>
+</html>
+

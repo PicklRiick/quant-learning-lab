@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="量化学习平台 · Lessons 3-5 Sources">
+<title>Lessons 3-5 Sources · 量化学习</title>
+<link rel="stylesheet" href="../assets/docs.css">
+</head>
+<body>
+<a class="skip" href="#document">跳至正文</a>
+<header class="site-bar"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">Q</span>量化学习<span class="brand-en">QUANT LEARNING</span></a><a class="back" href="../index.html">← 返回学习平台</a></header>
+<div class="doc-layout">
+<aside class="doc-sidebar" aria-label="文档导航"><div class="doc-label">研究笔记</div><nav aria-label="本页目录"><div class="toc"><span class="toctitle">本页目录</span><ul>
+<li><a href="#lesson-3-python-and-pandas-financial-data-workflow">Lesson 3: Python and pandas financial data workflow</a></li>
+<li><a href="#lesson-4-minimal-backtest-mechanics-and-bias-controls">Lesson 4: Minimal backtest mechanics and bias controls</a></li>
+<li><a href="#lesson-5-futures-basics-and-commodity-bridge">Lesson 5: Futures basics and commodity bridge</a></li>
+</ul>
+</div>
+</nav><div class="related"><a href="../CURRICULUM.html">十课学习总纲 ↗</a><a href="../NOTEBOOKLM_READING_PACKS.html">NotebookLM 阅读包 ↗</a><a href="../RESOURCES.html">资源清单 ↗</a></div></aside>
+<main id="document" class="doc-content" tabindex="-1"><p class="breadcrumb"><a href="../index.html">学习平台</a><span>/</span>研究笔记</p><h1 id="lessons-3-5-sources">Lessons 3-5 Sources</h1>
+<p>This note collects primary sources for the third, fourth, and fifth lessons. It complements <a href="0001-market-signal-map-sources.html">0001-market-signal-map-sources.md</a>.</p>
+<h2 id="lesson-3-python-and-pandas-financial-data-workflow">Lesson 3: Python and pandas financial data workflow</h2>
+<ul>
+<li><a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/02_read_write.html">pandas: read/write tabular data</a>
+  Use for reading CSV data with <code>read_csv</code>, then checking <code>head</code>, <code>dtypes</code>, and <code>info</code> before calculating anything.</li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/timeseries.html">pandas: time series/date functionality</a>
+  Use for <code>DatetimeIndex</code>, date parsing, resampling, time zones, and business-day thinking.</li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pct_change.html">pandas: DataFrame.pct_change</a>
+  Use for turning price into fractional return. The course should explicitly say this is fractional change, not already multiplied by 100.</li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/window.html">pandas: windowing operations</a>
+  Use for rolling windows, expanding windows, exponentially weighted windows, moving averages, and rolling volatility.</li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.shift.html">pandas: DataFrame.shift</a>
+  Use for the first anti-lookahead rule: a signal known after today's close should be shifted before it is applied to next-period returns.</li>
+<li><a href="https://numpy.org/doc/stable/user/absolute_beginners.html">NumPy: the absolute basics</a>
+  Use to explain vectorized array thinking to a learner with C++/Java background.</li>
+</ul>
+<h2 id="lesson-4-minimal-backtest-mechanics-and-bias-controls">Lesson 4: Minimal backtest mechanics and bias controls</h2>
+<ul>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/time-modeling/periods">QuantConnect: Time Modeling - Periods</a>
+  Use for bar timing: a period has start and end time, and the close is only known after the period ends.</li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/time-modeling/timeslices">QuantConnect: Timeslices</a>
+  Use to contrast vectorized toy backtests with event-driven backtests where the algorithm only receives current and past slices.</li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/reality-modeling/key-concepts">QuantConnect: Reality Modeling</a>
+  Use as the checklist for fills, slippage, fees, brokerage, buying power, settlement, short availability, margin, and capacity.</li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/research-guide">QuantConnect: Research Guide</a>
+  Use for look-ahead bias, survivorship bias, overfitting, outliers, and paper-trading discipline.</li>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html#time-series-split">scikit-learn: TimeSeriesSplit</a>
+  Use for time-ordered validation. The important lesson is "past trains, future tests"; do not randomly shuffle financial time series.</li>
+<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2326253">Bailey et al.: The Probability of Backtest Overfitting</a>
+  Use to warn that many strategy trials can manufacture an attractive backtest.</li>
+<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2460551">Bailey and Lopez de Prado: The Deflated Sharpe Ratio</a>
+  Use to explain that Sharpe ratio can be inflated by selection bias, multiple testing, and non-normal returns.</li>
+</ul>
+<h2 id="lesson-5-futures-basics-and-commodity-bridge">Lesson 5: Futures basics and commodity bridge</h2>
+<ul>
+<li><a href="https://www.cmegroup.com/education/courses/introduction-to-futures/definition-of-a-futures-contract">CME: Definition of a Futures Contract</a>
+  Use for standardized contract, delivery month, exchange trading, central clearing, and price discovery.</li>
+<li><a href="https://www.cmegroup.com/education/courses/introduction-to-futures/margin-know-what-is-needed">CME: Margin - Know What's Needed</a>
+  Use to explain that futures margin is not a stock down payment. It is capital deposited and kept with the broker to hold a futures position, and margin calls can force liquidation.</li>
+<li><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm">CFTC: Commitments of Traders</a>
+  Use for COT reports, trader categories, open interest, reportable positions, and historical positioning data.</li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/securities/asset-classes/futures/requesting-data/universes">QuantConnect: Futures Universes and Continuous Contracts</a>
+  Use to explain continuous futures series, mapped tradable contracts, and why adjusted continuous prices are not directly tradable.</li>
+<li><a href="https://www.quantconnect.com/docs/v2/writing-algorithms/securities/asset-classes/futures/handling-data">QuantConnect: Futures Handling Data</a>
+  Use for rollovers, contract changes, and event handling around mapped contracts.</li>
+<li><a href="https://www.lme.com/en/metals/non-ferrous/lme-copper">LME Copper</a>
+  Use only as a bridge example at the end of lesson 5, so the course does not become overly specific too early.</li>
+<li><a href="https://www.cmegroup.com/markets/metals/base/copper.contractSpecs.html">CME Copper Futures</a>
+  Use to show that the same commodity can have different exchange contracts and specifications.</li>
+</ul><footer class="doc-footer">量化学习 · 从可检验的假设开始。<a href="#document">回到顶部 ↑</a></footer></main>
+</div>
+</body>
+</html>

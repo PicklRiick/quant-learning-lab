@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>第 10 课：商品与铜的应用过渡</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Lesson 0010</div>
+        <h1>商品与铜的应用过渡</h1>
+        <p class="subtitle">到这里才把铜和有色金属作为应用场景引入：不是替代通用框架，而是检验通用框架能否接住真实产业数据。</p>
+        <div class="meta">
+          <span>预计时间：30-35 分钟</span>
+          <span><a href="../reference/0002-copper-futures-and-spot-data-map.html">打开铜数据地图</a></span>
+          <span><a href="../CURRICULUM.html">打开前十课总纲</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>本课位置</h2>
+        <p>前九课解决通用框架：假设、信号、数据、回测、期货、仓位、组合、成本、验证。第十课把它迁移到有色金属，尤其铜。</p>
+      </section>
+
+      <section>
+        <h2>核心阅读</h2>
+        <ul class="compact-list">
+          <li><a href="https://www.lme.com/en/metals/non-ferrous/lme-copper">LME Copper</a>：识别铜合约、报价、实物交割、仓库和官方价格体系。</li>
+          <li><a href="https://www.lme.com/en/Market-data/Reports-and-data/Warehouse-and-stocks-reports">LME Warehouse and Stock Reports</a>：理解库存、仓单、注销仓单和仓库报告的市场含义。</li>
+          <li><a href="https://icsg.org/">International Copper Study Group</a>：理解铜的生产、使用、贸易、库存和价格统计。</li>
+          <li><a href="https://www.cmegroup.com/markets/metals/base/copper.contractSpecs.html">CME Copper Futures</a>：比较同一商品在不同交易所的合约规格和交易机制。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>把现货数据放进框架</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>Alpha</strong>
+            <p>库存下降、基差走强、升水扩大可能表达现货偏紧。</p>
+          </article>
+          <article class="panel">
+            <strong>过滤器</strong>
+            <p>宏观风险、美元、利率、商品整体情绪可能决定是否启用信号。</p>
+          </article>
+          <article class="panel">
+            <strong>仓位</strong>
+            <p>波动、保证金、近月交割风险和公司实际敞口决定规模。</p>
+          </article>
+          <article class="panel">
+            <strong>合规</strong>
+            <p>客户、合同、报价和交易对手数据必须授权、脱敏、隔离用途。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>费曼输出</h2>
+        <div class="callout">
+          写一张铜期货研究卡：选择一个现货贸易变量，说明它属于 alpha、过滤器、仓位还是风控，并说明它何时可见、能否合规使用。
+        </div>
+      </section>
+
+      <section>
+        <h2>隐含假设与反例</h2>
+        <p>本课假设现货流程数据能被合法、稳定、带时间戳地用于研究。反例是授权不足、数据录入滞后、客户结构变化、贸易流程改变或个人交易隔离要求。</p>
+      </section>
+
+      
+    </main>
+  <script src="../assets/learning-state.js" defer></script>
+  </body>
+</html>
+

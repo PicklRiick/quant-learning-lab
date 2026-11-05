@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>期货基础速查</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Reference 0006</div>
+        <h1>期货基础速查</h1>
+        <p class="subtitle">期货不是“带杠杆的股票”。合约、保证金、期限和交割规则会改变策略设计。</p>
+      </header>
+
+      <section>
+        <h2>必须先问的问题</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>合约是什么</strong>
+            <p>标的、乘数、报价单位、最小变动价位、到期月、交割方式。</p>
+          </article>
+          <article class="panel">
+            <strong>保证金多少</strong>
+            <p>初始保证金、维持保证金、追加保证金、强平风险。</p>
+          </article>
+          <article class="panel">
+            <strong>交易哪一月</strong>
+            <p>近月、主力、远月、流动性和交割风险。</p>
+          </article>
+          <article class="panel">
+            <strong>如何移仓</strong>
+            <p>什么时候从旧合约切换到新合约，价差怎么处理。</p>
+          </article>
+          <article class="panel">
+            <strong>曲线形状如何</strong>
+            <p>contango、backwardation、基差、期限结构和展期收益。</p>
+          </article>
+          <article class="panel">
+            <strong>谁在持仓</strong>
+            <p>COT、商业套保者、管理资金、非报告持仓、持仓变化。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>和股票回测的差异</h2>
+        <ul class="compact-list">
+          <li>股票可以长期持有同一个 ticker；期货合约会到期。</li>
+          <li>连续合约适合算指标，但真实交易必须落到具体可交易合约。</li>
+          <li>保证金不是买入成本，盈亏按合约名义价值波动。</li>
+          <li>期限结构本身就是信号，不能只看单一价格序列。</li>
+          <li>商品期货还要关心库存、交割、仓单、季节性和产业链。</li>
+        </ul>
+      </section>
+
+      <footer class="footer">
+        Sources: <a href="https://www.cmegroup.com/education/courses/introduction-to-futures/definition-of-a-futures-contract">CME futures definition</a>,
+        <a href="https://www.cmegroup.com/education/courses/introduction-to-futures/margin-know-what-is-needed">CME margin</a>,
+        <a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm">CFTC COT</a>.
+      </footer>
+    </main>
+  </body>
+</html>
+

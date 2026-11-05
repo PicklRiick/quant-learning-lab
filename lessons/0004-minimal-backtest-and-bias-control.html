@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>第 4 课：最小回测与偏差控制</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Lesson 0004</div>
+        <h1>最小回测与偏差控制</h1>
+        <p class="subtitle">把信号变成收益很容易；让这个收益不作弊很难。本课训练的是检查顺序。</p>
+        <div class="meta">
+          <span>预计时间：20-25 分钟</span>
+          <span><a href="../reference/0005-backtest-bias-checklist.html">打开检查清单</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>最小回测公式</h2>
+        <p>先不要引入复杂框架。最小回测只有四个对象：资产收益、信号、持仓、策略收益。</p>
+        <pre class="formula"><code>asset_return[t] = price[t] / price[t-1] - 1
+signal[t] = rule(data visible at t)
+position[t+1] = signal[t]
+strategy_return[t+1] = position[t+1] * asset_return[t+1] - cost[t+1]</code></pre>
+      </section>
+
+      <section>
+        <h2>时间是第一偏差源</h2>
+        <p>QuantConnect 的 time modeling 文档把数据组织成 period 和 timeslice：bar 有开始和结束，算法在事件流中只能处理当前和过去的信息。这个思想比具体平台更重要：信号必须晚于数据可见时间，交易必须晚于信号产生时间。</p>
+      </section>
+
+      <section>
+        <h2>现实模型不是细节</h2>
+        <p>QuantConnect 的 reality modeling 清单包括 fills、slippage、fees、brokerage、buying power、settlement、short availability、margin 和 capacity。第一版 toy 回测可以简单，但策略卡必须承认这些现实约束将来要补。</p>
+      </section>
+
+      <section>
+        <h2>样本外不是可选项</h2>
+        <p>scikit-learn 的 TimeSeriesSplit 说明时间序列样本彼此相关，经典随机交叉验证会给出不合理的泛化估计；应该用更像“过去训练、未来测试”的切法。哪怕暂时不用机器学习，这条纪律也适用于策略研究。</p>
+        <div class="warning callout">
+          回测越漂亮，越要问：我调过多少参数？看过多少版本？有没有把未来测试集也用来做选择？
+        </div>
+      </section>
+
+      <section>
+        <h2>快速小测</h2>
+        <div class="quiz">
+          <div class="quiz-question">
+            <h3>时间序列验证最应避免什么？</h3>
+            <div class="quiz-options">
+              <button data-correct="true" data-good="对。随机打乱会破坏时间顺序。" data-bad="再想想：金融时间序列有顺序和相关性。">随机打乱</button>
+              <button data-correct="false" data-good="对。随机打乱会破坏时间顺序。" data-bad="固定训练期本身不是问题，问题是未来泄漏。">固定训练</button>
+              <button data-correct="false" data-good="对。随机打乱会破坏时间顺序。" data-bad="保留测试集是好事，不是要避免的事。">保留测试</button>
+              <button data-correct="false" data-good="对。随机打乱会破坏时间顺序。" data-bad="记录参数是研究纪律，不是错误。">记录参数</button>
+            </div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>课后动作</h2>
+        <ol class="compact-list">
+          <li>用 <a href="../reference/0005-backtest-bias-checklist.html">回测偏差检查清单</a> 检查你的第一张策略卡。</li>
+          <li>在策略卡里补一栏：<code>最可能的偏差来源</code>。</li>
+          <li>把样本切成设计期和样本外验证期，先写在纸面上。</li>
+        </ol>
+      </section>
+
+      
+    </main>
+    <script src="../assets/quiz.js"></script>
+  <script src="../assets/learning-state.js" defer></script>
+  </body>
+</html>
+

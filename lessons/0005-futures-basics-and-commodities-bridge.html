@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>第 5 课：期货基础与商品过渡</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Lesson 0005</div>
+        <h1>期货基础与商品过渡</h1>
+        <p class="subtitle">这节课把通用量化框架接到期货市场，但只做桥接，不把课程过早收窄到铜。</p>
+        <div class="meta">
+          <span>预计时间：20-25 分钟</span>
+          <span><a href="../reference/0006-futures-basics-bridge.html">打开速查</a></span>
+          <span><a href="../reference/0002-copper-futures-and-spot-data-map.html">打开铜应用地图</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>期货不是 ticker</h2>
+        <p>CME 的期货入门材料把期货描述为标准化合约：它规定标的、数量、质量、交割时间和地点。股票策略常常围绕一个 ticker；期货策略必须围绕一串会到期的合约。</p>
+      </section>
+
+      <section>
+        <h2>保证金不是首付</h2>
+        <p>CME 的保证金材料明确区分证券保证金和期货保证金：期货保证金是开仓后必须存放并维持在经纪商处的资金，不代表你拥有底层商品。保证金占合约名义价值的比例可能较小，因此盈亏、追加保证金和强平风险会被放大。</p>
+      </section>
+
+      <section>
+        <h2>连续合约用于研究，具体合约用于交易</h2>
+        <p>QuantConnect 的期货文档说明，连续期货合约是把一系列单独到期合约拼接成连续价格；连续合约价格适合喂给指标，但真实下单必须落到当前 mapped 的具体合约。这是期货回测和股票回测的根本差别之一。</p>
+        <pre class="formula"><code>indicator_price = adjusted continuous contract
+tradable_symbol = current mapped futures contract</code></pre>
+      </section>
+
+      <section>
+        <h2>COT 是结构数据，不是神谕</h2>
+        <p>CFTC 的 Commitments of Traders 报告提供每周期货和期权持仓结构。它适合帮助你理解商业套保者、管理资金和其他参与者的持仓变化，但不能机械地把某一类净多头当成买入信号。</p>
+      </section>
+
+      <section>
+        <h2>过渡到有色金属</h2>
+        <p>学完期货通用机制后，铜和有色金属会成为应用案例：库存、仓单、基差、升贴水、期限结构、现货贸易流程。现在只需要记住一点：商品期货策略卡要比股票策略卡多写合约、到期、移仓和交割风险。</p>
+      </section>
+
+      <section>
+        <h2>快速小测</h2>
+        <div class="quiz">
+          <div class="quiz-question">
+            <h3>连续期货价格最适合做什么？</h3>
+            <div class="quiz-options">
+              <button data-correct="true" data-good="对。连续价格适合算指标，交易要落到具体合约。" data-bad="再想想：连续合约本身通常不是可交易证券。">计算指标</button>
+              <button data-correct="false" data-good="对。连续价格适合算指标，交易要落到具体合约。" data-bad="真实下单必须使用具体合约。">直接下单</button>
+              <button data-correct="false" data-good="对。连续价格适合算指标，交易要落到具体合约。" data-bad="保证金由合约和清算规则决定。">决定保证</button>
+              <button data-correct="false" data-good="对。连续价格适合算指标，交易要落到具体合约。" data-bad="COT 来自监管报告，不是连续价格。">生成持仓</button>
+            </div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>课后动作</h2>
+        <ol class="compact-list">
+          <li>读 <a href="../reference/0006-futures-basics-bridge.html">期货基础速查</a>。</li>
+          <li>把你的第一张策略卡复制一份，增加四栏：合约、保证金、移仓、期限结构。</li>
+          <li>不要急着做铜策略；先问“如果这是期货，我的股票式回测哪里会错？”</li>
+        </ol>
+      </section>
+
+      
+    </main>
+    <script src="../assets/quiz.js"></script>
+  <script src="../assets/learning-state.js" defer></script>
+  </body>
+</html>
+

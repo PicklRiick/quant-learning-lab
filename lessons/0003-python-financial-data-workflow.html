@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>第 3 课：Python 金融数据最小工作流</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Lesson 0003</div>
+        <h1>Python 金融数据最小工作流</h1>
+        <p class="subtitle">这节课只学一条从价格到策略收益的管道：读取、检查、排序、收益率、滚动指标、信号延迟。</p>
+        <div class="meta">
+          <span>预计时间：20-25 分钟</span>
+          <span><a href="../reference/0004-python-financial-data-workflow.html">打开速查</a></span>
+          <span><a href="../research/0002-lessons-3-to-5-sources.html">打开资料笔记</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>本课的一个胜利</h2>
+        <p>你会看懂一段最小 pandas 回测前处理代码，并能指出哪里在避免未来函数。pandas 官方教程强调读取 CSV 后要先检查数据，时间序列文档也把日期解析、重采样、时区和业务日作为核心能力。</p>
+      </section>
+
+      <section>
+        <h2>价格不是策略输入的终点</h2>
+        <p>价格本身有单位，不能直接比较不同资产；收益率才是回测里的基本货币。pandas 的 <code>pct_change()</code> 返回的是 fractional change，例如 0.01 代表 1%，不是已经乘以 100 的百分数。</p>
+        <pre class="formula"><code>df["ret"] = df["close"].pct_change()</code></pre>
+      </section>
+
+      <section>
+        <h2>滚动窗口是第一批指标</h2>
+        <p>pandas 的 windowing API 支持 rolling、expanding 和 exponentially weighted window。第一阶段只需要 rolling：移动均线、滚动波动率、滚动最高/最低点都来自同一类思想。</p>
+        <pre class="formula"><code>df["ma200"] = df["close"].rolling(200).mean()
+df["vol60"] = df["ret"].rolling(60).std()</code></pre>
+      </section>
+
+      <section>
+        <h2>最关键的一行：shift</h2>
+        <p>如果一个信号用到了今天收盘价，那么今天收盘前你并不知道它。第一版向量化回测必须把信号延后一格，表示下一期才持仓。</p>
+        <pre class="formula"><code>df["signal"] = (df["close"] &gt; df["ma200"]).astype(int)
+df["position"] = df["signal"].shift(1)
+df["strategy_ret"] = df["position"] * df["ret"]</code></pre>
+        <div class="warning callout">
+          没有 <code>shift(1)</code> 的入门回测，大概率在偷吃今天已经发生的收益。
+        </div>
+      </section>
+
+      <section>
+        <div class="callout"><strong>收益模型的边界：</strong>上面的 close-to-close 收益乘延迟持仓，仅用来演示时间对齐。它并未模拟 t+1 日开盘成交，不能直接代表前课策略卡的执行方式。正式回测需使用开盘价、可成交时点及成本来重建收益。</div>
+        <h2>快速小测</h2>
+        <div class="quiz">
+          <div class="quiz-question">
+            <h3>今天收盘信号应当用于哪期收益？</h3>
+            <div class="quiz-options">
+              <button data-correct="true" data-good="对。收盘后才知道的信号，只能影响下一期。" data-bad="再想想：今天收盘信号不能吃今天收益。">下一期</button>
+              <button data-correct="false" data-good="对。收盘后才知道的信号，只能影响下一期。" data-bad="这会形成最早级别的未来函数。">本期内</button>
+              <button data-correct="false" data-good="对。收盘后才知道的信号，只能影响下一期。" data-bad="随机期没有交易含义，不能复现。">随机期</button>
+              <button data-correct="false" data-good="对。收盘后才知道的信号，只能影响下一期。" data-bad="上一期更不符合时间顺序。">上一期</button>
+            </div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>课后动作</h2>
+        <ol class="compact-list">
+          <li>读 <a href="../reference/0004-python-financial-data-workflow.html">Python 金融数据工作流速查</a>。</li>
+          <li>把第 2 课的策略卡中“入场规则”翻译成 <code>signal</code>。</li>
+          <li>明确写出你的信号需要 <code>shift(1)</code> 还是更长延迟。</li>
+        </ol>
+      </section>
+
+      
+    </main>
+    <script src="../assets/quiz.js"></script>
+  <script src="../assets/learning-state.js" defer></script>
+  </body>
+</html>
+

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Python 金融数据工作流速查</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Reference 0004</div>
+        <h1>Python 金融数据工作流速查</h1>
+        <p class="subtitle">第一阶段只需要一条纪律：先把时间和收益率弄对，再谈指标和策略。</p>
+      </header>
+
+      <section>
+        <h2>最小流程</h2>
+        <ol class="compact-list">
+          <li>读取数据：<code>pd.read_csv</code>。</li>
+          <li>检查数据：<code>head()</code>、<code>info()</code>、<code>dtypes</code>、缺失值、重复日期。</li>
+          <li>建立时间索引：把日期列转成 <code>DatetimeIndex</code>，并按时间排序。</li>
+          <li>计算收益率：<code>close.pct_change()</code>。</li>
+          <li>计算滚动指标：<code>rolling(window).mean()</code>、<code>rolling(window).std()</code>。</li>
+          <li>生成信号：把价格条件转成 <code>0/1</code> 或 <code>-1/0/1</code>。</li>
+          <li>延迟执行：<code>signal.shift(1)</code>，避免用今天收盘信号吃到今天收益。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>核心代码形状</h2>
+        <pre class="formula"><code>df = pd.read_csv("prices.csv", parse_dates=["date"])
+df = df.sort_values("date").set_index("date")
+df["ret"] = df["close"].pct_change()
+df["ma200"] = df["close"].rolling(200).mean()
+df["vol60"] = df["ret"].rolling(60).std()
+df["signal"] = (df["close"] &gt; df["ma200"]).astype(int)
+df["position"] = df["signal"].shift(1)
+df["strategy_ret"] = df["position"] * df["ret"]</code></pre>
+      </section>
+
+      <section>
+        <h2>常见错误</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>没有时间索引</strong>
+            <p>金融数据不是普通表格，日期顺序和可见时间会改变结论。</p>
+          </article>
+          <article class="panel">
+            <strong>收益率当价格用</strong>
+            <p>价格有单位，收益率可比较；策略收益应基于收益率。</p>
+          </article>
+          <article class="panel">
+            <strong>没有 shift</strong>
+            <p>今天收盘后才知道的信号，不能用于今天已经发生的收益。</p>
+          </article>
+          <article class="panel">
+            <strong>滚动窗口太短</strong>
+            <p>窗口越短噪声越大，窗口越多过拟合风险越高。</p>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Sources: <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/02_read_write.html">pandas IO tutorial</a>,
+        <a href="https://pandas.pydata.org/docs/user_guide/timeseries.html">pandas time series</a>,
+        <a href="https://pandas.pydata.org/docs/user_guide/window.html">pandas windowing</a>.
+      </footer>
+    </main>
+  </body>
+</html>
+

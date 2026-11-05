@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>回测偏差检查清单</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Reference 0005</div>
+        <h1>回测偏差检查清单</h1>
+        <p class="subtitle">漂亮曲线不是证据。先证明你的回测没有明显作弊，再讨论结果是否有研究价值。</p>
+      </header>
+
+      <section>
+        <h2>七项检查</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>可见时间</strong>
+            <p>信号使用的数据在当时是否已经可见？财报、宏观、修正数据尤其危险。</p>
+          </article>
+          <article class="panel">
+            <strong>执行延迟</strong>
+            <p>今天收盘后生成的信号，至少要到下一根 bar 才能成交。</p>
+          </article>
+          <article class="panel">
+            <strong>成本滑点</strong>
+            <p>手续费、买卖价差、冲击成本、滑点是否计入？高换手策略最敏感。</p>
+          </article>
+          <article class="panel">
+            <strong>样本外</strong>
+            <p>是否把设计期和验证期分开？时间序列不能随意随机打乱。</p>
+          </article>
+          <article class="panel">
+            <strong>幸存者偏差</strong>
+            <p>股票池是否只包含今天还活着的资产？指数成分是否用当时版本？</p>
+          </article>
+          <article class="panel">
+            <strong>调参次数</strong>
+            <p>看过多少参数组合？测试越多，越容易偶然找到漂亮结果。</p>
+          </article>
+          <article class="panel">
+            <strong>现实约束</strong>
+            <p>买入能力、保证金、融券、涨跌停、交割、移仓、容量是否影响交易？</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>最小回测公式</h2>
+        <pre class="formula"><code>return[t] = price[t] / price[t-1] - 1
+signal[t] = rule(data visible at t)
+position[t+1] = signal[t]
+strategy_return[t+1] = position[t+1] * return[t+1] - cost[t+1]</code></pre>
+      </section>
+
+      <footer class="footer">
+        Sources: <a href="https://www.quantconnect.com/docs/v2/writing-algorithms/key-concepts/research-guide">QuantConnect Research Guide</a>,
+        <a href="https://www.quantconnect.com/docs/v2/writing-algorithms/reality-modeling/key-concepts">QuantConnect Reality Modeling</a>,
+        <a href="https://scikit-learn.org/stable/modules/cross_validation.html#time-series-split">scikit-learn TimeSeriesSplit</a>.
+      </footer>
+    </main>
+  </body>
+</html>
+

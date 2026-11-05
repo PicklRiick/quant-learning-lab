@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>量化交易入门术语表</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Reference 0001</div>
+        <h1>量化交易入门术语表</h1>
+        <p class="subtitle">第一阶段只保留会反复用到的词。后续课程会继续扩展。</p>
+      </header>
+
+      <section class="grid">
+        <article class="panel">
+          <strong>策略假设</strong>
+          <p>一个可检验的市场主张，必须包含标的、数据、入场、出场、仓位、成本和评价指标。</p>
+        </article>
+        <article class="panel">
+          <strong>标的池</strong>
+          <p>策略允许交易的资产集合，例如 SPY、QQQ，或某一组流动性足够的 ETF。</p>
+        </article>
+        <article class="panel">
+          <strong>入场规则</strong>
+          <p>什么条件出现时买入或卖出。规则必须能用当时已经可见的数据计算。</p>
+        </article>
+        <article class="panel">
+          <strong>出场规则</strong>
+          <p>什么条件出现时平仓、减仓或反向。没有出场规则，就没有完整策略。</p>
+        </article>
+        <article class="panel">
+          <strong>仓位</strong>
+          <p>一次交易或一个策略占用多少资金。仓位决定亏损速度，通常比入场信号更重要。</p>
+        </article>
+        <article class="panel">
+          <strong>回测</strong>
+          <p>用历史数据模拟策略过去会怎样表现。它是排除坏想法的工具，不是证明未来盈利的工具。</p>
+        </article>
+        <article class="panel">
+          <strong>过拟合</strong>
+          <p>策略被调到特别适合过去数据，但未来表现变差。测试次数越多，越需要防范。</p>
+        </article>
+        <article class="panel">
+          <strong>样本内</strong>
+          <p>用于设计、调参、选择策略的数据区间。</p>
+        </article>
+        <article class="panel">
+          <strong>样本外</strong>
+          <p>策略定稿后才用于评估的数据区间。它更接近真实检验。</p>
+        </article>
+        <article class="panel">
+          <strong>滑点</strong>
+          <p>预期成交价和实际成交价的差异。市场波动、流动性和订单大小都会影响滑点。</p>
+        </article>
+        <article class="panel">
+          <strong>手续费</strong>
+          <p>交易产生的显性费用。频繁交易时，小成本也可能吞掉策略优势。</p>
+        </article>
+        <article class="panel">
+          <strong>纸面交易</strong>
+          <p>不动用真实资金的模拟实盘。它检验流程、下单逻辑和心理预期，但仍不能完全代表实盘。</p>
+        </article>
+      </section>
+
+      <footer class="footer">
+        Linked lesson: <a href="../lessons/0001-from-idea-to-testable-hypothesis.html">第 1 课</a>
+      </footer>
+    </main>
+  </body>
+</html>

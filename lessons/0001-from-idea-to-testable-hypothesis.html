@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>第 1 课：从交易想法到可检验假设</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Lesson 0001</div>
+        <h1>从交易想法到可检验假设</h1>
+        <p class="subtitle">量化交易的第一步不是预测涨跌，而是把一个想法压缩成规则：别人拿到同一份数据，也能得到同一组交易。</p>
+        <div class="meta">
+          <span>预计时间：10-15 分钟</span>
+          <span>目标：写出第一张策略假设卡</span>
+          <span><a href="../reference/0001-quant-trading-glossary.html">打开术语表</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>本课的一个胜利</h2>
+        <p>学完这节，你应该能把“我觉得某个东西会涨”改写成一个可回测的问题。可回测不是“肯定赚钱”，而是“可以被历史数据明确支持或反驳”。</p>
+        <div class="callout">
+          <strong>核心句式：</strong>
+          在某个标的池上，如果某个可观察条件出现，我按某个订单和仓位交易，并用某个出场规则、成本假设和评价指标判断它是否值得继续研究。
+        </div>
+      </section>
+
+      <section>
+        <h2>最小闭环</h2>
+        <div class="grid">
+          <article class="panel">
+            <strong>1. 假设</strong>
+            <p>先写清楚你相信什么市场行为存在，例如趋势延续、均值回归、事件反应不足。</p>
+          </article>
+          <article class="panel">
+            <strong>2. 规则</strong>
+            <p>把假设变成入场、出场、仓位和成本。规则必须只使用当时已经知道的数据。</p>
+          </article>
+          <article class="panel">
+            <strong>3. 回测</strong>
+            <p>用历史数据模拟过去表现。回测的目的先是排除坏想法，而不是证明未来一定盈利。</p>
+          </article>
+          <article class="panel">
+            <strong>4. 验证</strong>
+            <p>先样本外，再纸面交易，最后才考虑小资金实盘。每一步都要预先定义失败条件。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>三个现实约束</h2>
+        <ul class="compact-list">
+          <li><strong>订单会影响结果。</strong> Investor.gov 说明，市价单通常保证执行，但不保证成交价格；限价单控制价格，但不保证成交；止损单触发后会变成市价单。见 <a href="https://www.investor.gov/introduction-investing/investing-basics/how-stock-markets-work/types-orders">Types of Orders</a>。</li>
+          <li><strong>风险不是只看亏多少钱。</strong> 风险包括不确定性、潜在亏损、波动和流动性。见 <a href="https://www.investor.gov/introduction-investing/investing-basics/what-risk">Investor.gov: What is Risk?</a>。</li>
+          <li><strong>漂亮回测可能是错觉。</strong> Bailey、Borwein、Lopez de Prado 和 Zhu 的论文指出，投资回测中的标准 hold-out 方法可能不可靠，并提出估计回测过拟合概率的框架。见 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2326253">The Probability of Backtest Overfitting</a>。</li>
+        </ul>
+        <div class="warning callout">
+          你希望未来小资金实盘验证，所以从第一天就要把账户、订单、成本、滑点和风控写进研究流程。FINRA 在 2026-06-04 的投资者材料中提醒，频繁日内交易可能带来高成本、税务影响、时间压力和损失全部甚至更多本金的风险，尤其是使用保证金时。见 <a href="https://www.finra.org/investors/insights/frequent-intraday-trading">FINRA: Frequent Intraday Trading</a>。
+        </div>
+      </section>
+
+      <section>
+        <h2>策略假设卡</h2>
+        <p>先不要写代码。先填写这张卡。空白越少，后面的 Python 回测越不容易变成事后解释。</p>
+
+        <form class="worksheet" data-hypothesis-card>
+          <label for="idea">原始想法：</label>
+          <textarea id="idea" placeholder="例如：大盘突破近期高点后可能继续上涨"></textarea>
+
+          <label for="universe">标的池：</label>
+          <input id="universe" placeholder="例如：SPY 或一组高流动性 ETF" />
+
+          <label for="entry">入场规则：</label>
+          <textarea id="entry" placeholder="例如：收盘价高于过去 20 日最高收盘价时，下一交易日买入"></textarea>
+
+          <label for="exit">出场规则：</label>
+          <textarea id="exit" placeholder="例如：收盘价跌破 10 日均线，或持有满 20 个交易日"></textarea>
+
+          <label for="sizing">仓位规则：</label>
+          <input id="sizing" placeholder="例如：每次只使用账户资金的 10%" />
+
+          <label for="cost">成本和成交假设：</label>
+          <input id="cost" placeholder="例如：每次交易 0.05% 成本，按下一日开盘价成交" />
+
+          <label for="metric">评价指标：</label>
+          <input id="metric" placeholder="例如：年化收益、最大回撤、夏普率、交易次数" />
+
+          <button type="submit">检查假设卡</button>
+          <div class="worksheet-result">填写后点击检查。结果只评估“是否可回测”，不评估是否赚钱。</div>
+        </form>
+      </section>
+
+      <section>
+        <h2>快速小测</h2>
+        <div class="quiz">
+          <div class="quiz-question">
+            <h3>哪一句最像可回测的策略假设？</h3>
+            <div class="quiz-options">
+              <button data-correct="true" data-good="对。它仍然不完整，但至少有一个可计算条件。" data-bad="再看一眼：答案要能从数据中机械计算。">均线突破买入</button>
+              <button data-correct="false" data-good="对。它仍然不完整，但至少有一个可计算条件。" data-bad="“感觉”不能直接回测，必须改成可观察变量。">感觉很强买入</button>
+              <button data-correct="false" data-good="对。它仍然不完整，但至少有一个可计算条件。" data-bad="“不错”太含糊，新闻需要先变成数据字段。">新闻不错买入</button>
+              <button data-correct="false" data-good="对。它仍然不完整，但至少有一个可计算条件。" data-bad="推荐来源不是规则，除非你能定义信号数据。">朋友推荐买入</button>
+            </div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <h3>回测前先写什么？</h3>
+            <div class="quiz-options">
+              <button data-correct="true" data-good="对。先写规则，再跑历史数据。" data-bad="回测前要先定规则，避免事后挑结果。">入场规则</button>
+              <button data-correct="false" data-good="对。先写规则，再跑历史数据。" data-bad="调参结果只能在规则和数据流程之后出现。">调参结果</button>
+              <button data-correct="false" data-good="对。先写规则，再跑历史数据。" data-bad="收益截图不是研究设计，容易诱发选择偏差。">收益截图</button>
+              <button data-correct="false" data-good="对。先写规则，再跑历史数据。" data-bad="热门股票不是策略规则，只是可能的标的来源。">热门股票</button>
+            </div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <h3>小资金实盘前必须经过哪一步？</h3>
+            <div class="quiz-options">
+              <button data-correct="true" data-good="对。纸面交易先检查流程和执行假设。" data-bad="实盘前要先检验流程，而不是直接冒真实资金风险。">纸面交易</button>
+              <button data-correct="false" data-good="对。纸面交易先检查流程和执行假设。" data-bad="加仓只能在风控和验证通过后讨论。">加大仓位</button>
+              <button data-correct="false" data-good="对。纸面交易先检查流程和执行假设。" data-bad="频繁换股会增加成本，也会让研究问题变模糊。">频繁换股</button>
+              <button data-correct="false" data-good="对。纸面交易先检查流程和执行假设。" data-bad="隐藏亏损会破坏复盘，必须预先定义止损和失败条件。">隐藏亏损</button>
+            </div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>本课后的阅读</h2>
+        <p>主阅读：<a href="https://www.investor.gov/introduction-investing/investing-basics/how-stock-markets-work/types-orders">Investor.gov: Types of Orders</a>。先把市价单、限价单、止损单区分清楚。下一课将梳理市场信号，再用 Python 把规则表达成数据流程。成交价始终需要作为明确的研究假设。</p>
+        <p>自检：不看资料，复述你的策略卡，并逐项检查数据可见时间、交易规则、成本与失败条件。</p>
+      </section>
+
+      
+    </main>
+    <script src="../assets/quiz.js"></script>
+  <script src="../assets/learning-state.js" defer></script>
+  </body>
+</html>

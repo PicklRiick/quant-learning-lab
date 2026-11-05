@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>第 2 课：用市场信号地图写第一张策略卡</title>
+    <link rel="stylesheet" href="../assets/lesson.css" />
+  </head>
+  <body>
+    <a class="lesson-home" href="../index.html#courses">← 量化研习室 / 课程目录</a>
+    <main class="page">
+      <header class="lesson-header">
+        <div class="kicker">Lesson 0002</div>
+        <h1>用市场信号地图写第一张策略卡</h1>
+        <p class="subtitle">这节课的目标不是找到能赚钱的策略，而是学会从信号地图中选一个简单、可检验、不会偷看未来的假设。</p>
+        <div class="meta">
+          <span>预计时间：15-20 分钟</span>
+          <span><a href="../reference/0003-market-signal-map.html">打开市场信号地图</a></span>
+          <span><a href="../research/0001-market-signal-map-sources.html">打开阅读笔记</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>先选位置，再选指标</h2>
+        <p>初学者最容易犯的错是先堆指标：均线、RSI、VIX、新闻、宏观、成交量全部加进去。更稳的顺序是先问：这个变量在策略中扮演什么角色？</p>
+        <div class="grid">
+          <article class="panel">
+            <strong>方向</strong>
+            <p>决定买、卖、空仓。第一张卡建议用趋势/动量。</p>
+          </article>
+          <article class="panel">
+            <strong>过滤</strong>
+            <p>决定什么时候不交易。第一张卡建议用波动率过滤。</p>
+          </article>
+          <article class="panel">
+            <strong>仓位</strong>
+            <p>决定押多少。第一张卡先固定小仓位。</p>
+          </article>
+          <article class="panel">
+            <strong>执行</strong>
+            <p>决定什么时候、按什么价格成交。第一张卡用下一交易日开盘或收盘。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>为什么从趋势开始</h2>
+        <p>AQR 的 <a href="https://www.aqr.com/Insights/Research/Journal-Article/Time-Series-Momentum">Time Series Momentum</a> 研究的是资产自身过去收益和未来收益之间的关系，覆盖股指、货币、商品和债券等市场。它适合入门，不是因为一定最好，而是因为规则容易写清楚，错误容易被回测暴露。</p>
+        <p>第一张卡不追求“有见地”，追求“可检验”。你的见地会在后面通过市场信号地图、期货基础、有色金属应用慢慢加进去。</p>
+      </section>
+
+      <section>
+        <h2>第一张策略卡模板</h2>
+        <form class="worksheet" data-hypothesis-card>
+          <label for="idea">原始想法：</label>
+          <textarea id="idea">趋势向上且风险不高时，持有一个流动性好的资产。</textarea>
+
+          <label for="universe">标的池：</label>
+          <input id="universe" value="先用 SPY；学完期货后再迁移到主力期货合约。" />
+
+          <label for="entry">入场规则：</label>
+          <textarea id="entry">t 日收盘后，若收盘价高于 200 日均线，且过去 60 日收益率为正，则在 t+1 日开盘买入。</textarea>
+
+          <label for="exit">出场规则：</label>
+          <textarea id="exit">t 日收盘后，若收盘价低于 200 日均线，则在 t+1 日开盘退出。</textarea>
+
+          <label for="sizing">仓位规则：</label>
+          <input id="sizing" value="固定使用账户资金的 10%。" />
+
+          <label for="cost">成本和成交假设：</label>
+          <input id="cost" value="下一交易日开盘成交；每次交易加入手续费和滑点。" />
+
+          <label for="metric">评价指标：</label>
+          <input id="metric" value="年化收益、最大回撤、夏普率、换手率、交易次数、样本外表现。" />
+
+          <button type="submit">检查假设卡</button>
+          <div class="worksheet-result">这是一张教学用策略卡。你可以先改其中一项，再点击检查。</div>
+        </form>
+      </section>
+
+      <section>
+        <h2>快速小测</h2>
+        <div class="quiz">
+          <div class="quiz-question">
+            <h3>VIX 更适合先放在哪里？</h3>
+            <div class="quiz-options">
+              <button data-correct="true" data-good="对。入门阶段先把波动率当风险过滤器。" data-bad="再想想：VIX 本身不是直接的买卖方向。">风险过滤</button>
+              <button data-correct="false" data-good="对。入门阶段先把波动率当风险过滤器。" data-bad="方向信号应该先回答买或卖，VIX 更像环境变量。">方向信号</button>
+              <button data-correct="false" data-good="对。入门阶段先把波动率当风险过滤器。" data-bad="成交假设是价格、滑点、费用，不是风险环境。">成交假设</button>
+              <button data-correct="false" data-good="对。入门阶段先把波动率当风险过滤器。" data-bad="评价指标是回测结果，不是入场前变量。">评价指标</button>
+            </div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <h3>第一张卡为什么不堆五个指标？</h3>
+            <div class="quiz-options">
+              <button data-correct="true" data-good="对。自由度太多会让漂亮结果更可疑。" data-bad="核心风险是自由度和过拟合，不是指标名字。" >减少过拟合</button>
+              <button data-correct="false" data-good="对。自由度太多会让漂亮结果更可疑。" data-bad="复杂不等于专业，复杂也可能只是不可解释。">显得简单</button>
+              <button data-correct="false" data-good="对。自由度太多会让漂亮结果更可疑。" data-bad="速度不是关键，研究质量才是关键。">运行更快</button>
+              <button data-correct="false" data-good="对。自由度太多会让漂亮结果更可疑。" data-bad="课程当然会讲多因素，但要先能解释单因素。" >拒绝多因子</button>
+            </div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>课后动作</h2>
+        <ol class="compact-list">
+          <li>读 <a href="../reference/0003-market-signal-map.html">市场信号地图</a>，只关注七类信号分别在回答什么问题。</li>
+          <li>打开 <a href="../research/0001-market-signal-map-sources.html">研究笔记</a>，先读趋势、波动、回测过拟合三段。</li>
+          <li>把上面的策略卡改成你自己的第一版。不要改超过两个字段。</li>
+          <li>检查你的版本是否可回测、是否偷看未来，以及规则是否过度复杂；记录还需要验证的问题。</li>
+        </ol>
+      </section>
+
+      
+    </main>
+    <script src="../assets/quiz.js"></script>
+  <script src="../assets/learning-state.js" defer></script>
+  </body>
+</html>
